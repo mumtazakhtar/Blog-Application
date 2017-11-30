@@ -1,0 +1,96 @@
+/*li{
+	list-style: none;
+	float: left;
+	margin: -24px 2px 2px 2px;
+}
+a{
+	text-decoration: none;
+    padding: 9px 38px 9px 38px;
+    margin: 2px 2px 2px 2px;
+    font-size: 20px;
+    color: darkblue;
+    border-radius: 50%
+}*/
+.nav{
+    background-color: hotpink;
+}
+h1{
+    text-align: center;
+}
+.comments{
+    list-style: none;
+}
+.message{
+    text-align: center;
+    font-size: 25px;
+    text-transform: capitalize;
+    color: darkblue;
+}
+a{
+    color: gray;
+}
+a:hover{
+	background-color: hotpink;
+	color: white;
+}
+label{
+
+}
+h2{
+	margin: 0px 2px 0px 2px;
+    padding: 14px 2px 0px 43px;
+    color: gray;
+}
+.para{
+	display: -webkit-inline-box;
+
+}
+.submit-post{
+    margin: 2px 2px 2px 90px;
+
+}
+.input-field{
+	border: gray;
+    border-style: solid;
+    display: inline-block;
+    padding: 23px 12px 8px 27px;
+    margin: 72px 2px 2px 376px;
+
+}
+.input-field-login{
+	border: gray;
+    border-style: solid;
+    display: inline-block;
+    padding: 23px 12px 8px 27px;
+    margin: 93px 2px 2px 376px;
+
+}
+.fields{
+	   padding: 15px 54px 18px 102px;
+    margin: 2px 2px 2px 2px;
+}
+
+.btn_signup{
+	padding: 11px 17px 9px 21px;
+    margin: 2px 2px 2px 87px;
+    background-color: hotpink;
+    color: gray;
+
+}
+.btn_login{
+    margin: 2px 2px 2px 2px;
+    padding: 2px 2px 2px 2px;
+}
+.posts{
+	list-style: none;
+    float: none;
+    display: inline-block;
+    background-color: papayawhip;
+}
+.comments{
+	
+}
+.all_posts{
+	    margin: 2px 2px 2px 426px;
+
+}

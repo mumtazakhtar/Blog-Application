@@ -1,0 +1,53 @@
+doctype html
+html
+  head
+    title Blog Application
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    link(rel="stylesheet", type="text/css", href="css/style.css")
+
+  body
+    nav.navbar.navbar-default.nav
+      .container
+        .navbar-header
+          a.navbar-brand(href='#') BLOG
+        ul.nav.navbar-nav
+          li
+            a(href='#') Home
+          li.active
+            a(href='/allposts') All posts
+          li
+            a(href='/profile') Profile
+        ul.nav.navbar-right
+          li
+            a(href='/logout')
+              span.glyphicon.glyphicon-user
+              | Logout
+  div.row.details
+    div.col-lg-4
+    div.col-lg-4
+      if posts
+        each post in posts
+          each user in users
+            if user.id === post.userId
+              h3.posts(id= post) #{post.posts}
+              h4 - Posted by #{user.name}  
+          
+          form(action=`/comment/${post.id}`, method='post')
+            input(type='text', name='comment', placeholder='write comment')
+            input(type='submit',name='submit', value='comment')
+          p All comments
+          each comment in post.comments
+              each user in users
+                if comment.userId === user.id
+                  p.comments <b> #{user.name} </b> commented <h6>#{comment.comments}</h6>
+
+               
+                            
+
+
+
+

@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title Blog App
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    link(rel="stylesheet", type="text/css", href="css/style.css")
+  body
+    nav.navbar.navbar-default.nav
+      .container
+        .navbar-header
+          a.navbar-brand(href='#') BLOG
+        ul.nav.navbar-nav
+          li.active
+            a(href='#') Home
+          li
+            a(href='/allposts') All posts
+          li
+            a(href='/profile') Profile
+       
+  if message
+    p.message= message
+  form.input-field-login(action='/login', method='POST', autocomplete='off')
+    h2 LOGIN
+    br
+    br
+    input.fields(type='text', name='name', placeholder="user name")
+    br
+    br
+    input.fields(type='password', name='password', placeholder= "password")
+    br
+    br
+    button.btn_signup(type='submit', name="login") Login
+    p.para Not registered yet!
+    a.btn_login(href='/users/new', role='button') Signup
+  
