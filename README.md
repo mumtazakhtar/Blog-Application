@@ -44,9 +44,10 @@ The Blog app is designed during the 11th week of NYCDA 'Web Developent Intensive
 ![banner](https://github.com/mumtazakhtar/Blog-Application/blob/master/public/images/screenshots/allposts.png?raw=true)
 > Visualization of allposts page where you can see everybody's posts. You can also click on a particular post which redirects to persons profile where you can view all the posts along with comments.
 
-![banner](https://github.com/mumtazakhtar/Blog-Application/blob/master/public/images/screenshots/biancaposts.png?raw=true)
-> Visualization of allposts page where you can see everybody's posts. You can also click on a particular post which redirects to persons profile where you can view all the posts along with comments.
 
+
+![banner](https://github.com/mumtazakhtar/Blog-Application/blob/master/public/images/screenshots/biancaposts.png?raw=true)
+> Visualization of profile of particular person where you can see all the posts posted by that person along with comments.
 
 ### How To Use
 + Download Repository
