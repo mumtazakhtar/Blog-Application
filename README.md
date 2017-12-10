@@ -28,7 +28,7 @@ The Blog app is designed during the 11th week of NYCDA 'Web Developent Intensive
 
 
 
-![banner](https://github.com/mumtazakhtar/Blog-Application/blob/master/public/images/screenshots/profile?raw=true)
+![banner](https://github.com/mumtazakhtar/Blog-Application/blob/master/public/images/screenshots/profile.png?raw=true)
 > Visualization of profile page where you can see all your posts along with comments people made on it.
 
 ### Concepts Utilized
@@ -41,7 +41,7 @@ The Blog app is designed during the 11th week of NYCDA 'Web Developent Intensive
 + Body-Parser
 
 
-![banner](https://github.com/mumtazakhtar/Blog-Application/blob/master/public/images/screenshots/allposts?raw=true)
+![banner](https://github.com/mumtazakhtar/Blog-Application/blob/master/public/images/screenshots/allposts.png?raw=true)
 > Visualization of allposts page where you can see everybody's posts. You can also click on a particular post which redirects to persons profile where you can view all the posts along with comments.
 
 ![banner](https://github.com/mumtazakhtar/Blog-Application/blob/master/public/images/screenshots/baincaposts.png?raw=true)
