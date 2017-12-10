@@ -32,11 +32,26 @@ app.use(session({
     resave: false
 }))
 
+
+//<--------Multer----------->
+const multer  = require('multer')
+const myStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '../public/images/user-images')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+})
+const upload = multer({ storage: myStorage });
+
+
 //<----------Defining models----------->
 const User = sequelize.define('users', {
     name: Sequelize.STRING,
     email: Sequelize.STRING,
-    password: Sequelize.STRING
+    password: Sequelize.STRING,
+    profilePicture: Sequelize.STRING 
 }, { timestamps: false })
 
 const Post = sequelize.define('posts',{
@@ -63,8 +78,9 @@ app.get('/', function(req, res) {
 })
 
 // <----------Create new user (Signup)----------->
-app.post('/users', function(req, res) {
+app.post('/users' , upload.single('profileImage'), (req, res, next)=> {
 
+    let path = req.file.path.replace('public', '')
     let Name = req.body.name
     let Email = req.body.email
     let Password = req.body.password
@@ -74,7 +90,8 @@ app.post('/users', function(req, res) {
     User.create({
         name: Name,
         email: Email,
-        password: Password
+        password: Password,
+        profilePicture: path
     }).then(function(user) {
         req.session.user = user;
         res.redirect('/?message=' + encodeURIComponent("you are succesfully registered"))
@@ -242,8 +259,46 @@ app.post('/comment/:id',function(req,res){
         })
         res.redirect('/allposts')
     });
-});
+})
 
+
+//<-----------specific post----------->
+app.get('/selected', (req,res)=>{
+    let input = req.query.selected;
+    console.log(`----->input ${input}`)
+    User.findAll()
+    .then(allUsers=>{
+        User.findOne({
+        where: {
+            id: input
+        }
+
+    }).then(function(details) {
+        Post.findAll({
+            where: {
+                userId: details.id
+            },
+            include: [{
+                model: Comment
+            }]
+        }).then(posts => {
+
+            console.log(`all posts-------->${JSON.stringify(posts)}`)
+            posts = posts.map(data => {
+                var columns = data.dataValues;
+                return {
+                    id: columns.id,
+                    posts: columns.posts,
+                    comments: columns.comments
+                }
+            })
+
+        res.render('newProfile',{allUsers:allUsers ,user: details, posts: posts});
+    })
+    })
+
+    })
+})
 
 
 //<------------logout------------>
@@ -253,7 +308,7 @@ app.get('/logout', function(req, res) {
             throw error;
         }
         res.redirect('/')
-    });
+    })
 })
 
 

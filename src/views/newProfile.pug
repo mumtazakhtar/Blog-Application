@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    title Blog App
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    link(rel="stylesheet", type="text/css", href="css/style.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Martel+Sans" rel="stylesheet")
+  body
+    nav.navbar.navbar-default.nav
+      .container
+        .navbar-header
+          a.navbar-brand(href='#') BLOG
+        ul.nav.navbar-nav
+          li
+            a(href='/') Home
+          li
+            a(href='/allposts') All posts
+          li.active
+            a(href='/profile') Profile
+        ul.nav.navbar-right
+          li
+            a(href='/logout')
+              span.glyphicon.glyphicon-user
+              | Logout
+  
+  .container  
+    .row
+      div.col-lg-4
+        img(src=`${user.profilePicture}`,  width='80%', style="border-radius:100%; width:80%; height:80%;")
+        h2(style="text-transform:capitalize; font-family: 'Berkshire Swash', cursive;") #{user.name}
+  
+      div.col-lg-8
+        if posts
+          each post in posts
+            h3.posts(id=post, style="font-family: 'Martel Sans', sans-serif;") #{post.posts}
+            form(action=`/comment/${post.id}`, method='post')
+              input.comments(type='text', name='comment', placeholder='write comment', width="100px")
+              input.comments(type='submit',name='submit', value='comment')
+            h4 All comments
+            each comment in post.comments
+
+              each user in allUsers
+                if comment.userId === user.id
+                  p.comments <b> #{user.name} </b> commented <h6>#{comment.comments}</h6>
+
+  .footer
+      .container
+        .rows
+          div.col-lg-4
+            p.copyrights copyrights @ 2017 All rights reserved
+          div.col-lg-4
+          div.col-lg-4
+            a.mediaIcon(href="www.facebook.com" class="fa fa-facebook")
+            a.mediaIcon(href="www.twitter.com" class="fa fa-twitter")
+            a.mediaIcon(href="www.google.com" class="fa fa-google")
+              
+            
+
+

@@ -25,18 +25,28 @@ html
             a(href='/logout')
               span.glyphicon.glyphicon-user
               | Logout
-    form.input-field-login(action='/users', method='POST', autocomplete='off')
-      h2 Create Your Account
-      input.fields(type='text', name='name', placeholder=" firstname or lastname")
-      br
-      br
-      input.fields(type='text', name='email', placeholder="Email Address")
-      br
-      br
-      input.fields(type='password', name='password', placeholder= "password")
-      br
-      br
-      button.btn_signup(type='submit', name="sign-up") Signup
-      p.para Already registered!
-      a.btn_login(href='/login', role='button') login
+
+    .container
+      .rows
+        .col-lg-4
+        .col-lg-4
+                  
+          form.input-field-login(action='/users', method='POST', autocomplete='off', enctype='multipart/form-data')
+            h2 Create Your Account
+            input.fields(type='text', name='name', placeholder=" firstname or lastname")
+            br
+            br
+            input.fields(type='text', name='email', placeholder="Email Address")
+            br
+            br
+            input.fields(type='password', name='password', placeholder= "password")
+            br
+            br
+            p Add a profile picture
+            input.fields(type='file', name='profileImage', placeholder='Upload profile picture', required)
+            br
+            br
+            button.btn_signup(type='submit', name="sign-up") Signup
+            p.para Already registered!
+            a.btn_login(href='/login', role='button') login
   

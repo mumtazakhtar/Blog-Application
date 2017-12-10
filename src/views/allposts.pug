@@ -1,13 +1,15 @@
 doctype html
 html
   head
-    title Blog Application
+    title Blog App
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     link(rel="stylesheet", type="text/css", href="css/style.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Martel+Sans" rel="stylesheet")
 
   body
     nav.navbar.navbar-default.nav
@@ -27,23 +29,32 @@ html
               span.glyphicon.glyphicon-user
               | Logout
   div.row.details
-    div.col-lg-4
-    div.col-lg-4
+    div.col-lg-2
+    div.col-lg-8
       if posts
         each post in posts
           each user in users
             if user.id === post.userId
-              h3.posts(id= post) #{post.posts}
-              h4 - Posted by #{user.name}  
+              .posts
+                a.post(href=`/selected?selected=${user.id}`, style="font-family: 'Martel Sans', sans-serif;")(id= post) #{post.posts}
+                span
+                  h4(style="display:inline-block") - Posted by #{user.name} 
+                  img(src=`${user.profilePicture}`,width='6%', style=" display:inline; border-radius:50%;" )  
           
-          form(action=`/comment/${post.id}`, method='post')
-            input(type='text', name='comment', placeholder='write comment')
-            input(type='submit',name='submit', value='comment')
-          p All comments
-          each comment in post.comments
-              each user in users
-                if comment.userId === user.id
-                  p.comments <b> #{user.name} </b> commented <h6>#{comment.comments}</h6>
+          
+      else
+        p No posts to display
+  .footer
+      .container
+        .rows
+          div.col-lg-4
+            p.copyrights copyrights @ 2017 All rights reserved
+          div.col-lg-4
+          div.col-lg-4
+            a.mediaIcon(href="www.facebook.com" class="fa fa-facebook")
+            a.mediaIcon(href="www.twitter.com" class="fa fa-twitter")
+            a.mediaIcon(href="www.google.com" class="fa fa-google")
+
 
                
                             

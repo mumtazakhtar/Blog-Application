@@ -1,14 +1,15 @@
 doctype html
 html
   head
-    title Blog Application
+    title Blog App
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     link(rel="stylesheet", type="text/css", href="css/style.css")
-
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Martel+Sans" rel="stylesheet")
   body
     nav.navbar.navbar-default.nav
       .container
@@ -16,7 +17,7 @@ html
           a.navbar-brand(href='#') BLOG
         ul.nav.navbar-nav
           li
-            a(href='#') Home
+            a(href='/') Home
           li
             a(href='/allposts') All posts
           li.active
@@ -27,21 +28,23 @@ html
               span.glyphicon.glyphicon-user
               | Logout
   
-    h1 Welcome #{user.name}!
-  div.row
-    div.col-lg-4
-    div.col-lg-4
-      h3 Post something here
-      form(action='/posts',method= 'post', autocomplete= 'off')
-        input.form-control(type='text', name= 'post', placeholder= 'write Something')
-        button.btn.btn-default.submit-post(type='submit') POST
+  .container  
+    .row
+      div.col-lg-4
+        img(src=`${user.profilePicture}`,  width='80%',style="border-radius:50%; width:80%; height:80%;")
+      div.col-lg-4
+        h1(style="font-family: 'Berkshire Swash', cursive;") Welcome #{user.name}!
+        h3(style="font-family: 'Berkshire Swash', cursive;") Post something here
+        form(action='/posts',method= 'post', autocomplete= 'off')
+          input.post-input(type='text', name= 'post', placeholder= 'write Something' style="display:inline;")
+          button.btn.btn-default.submit-post(type='submit', style="display:inline;") POST
   
   div.row.details
     div.col-lg-4
     div.col-lg-4
       if posts
         each post in posts
-          h3.posts(id=post) #{post.posts}
+          h3(style="font-family: 'Martel Sans', sans-serif;").posts(id=post) #{post.posts}
           h4 All comments
           each comment in post.comments
 
@@ -49,6 +52,16 @@ html
               if comment.userId === user.id
                 p.comments <b> #{user.name} </b> commented <h6>#{comment.comments}</h6>
             
+  .footer
+      .container
+        .rows
+          div.col-lg-4
+            p.copyrights copyrights @ 2017 All rights reserved
+          div.col-lg-4
+          div.col-lg-4
+            a.mediaIcon(href="www.facebook.com" class="fa fa-facebook")
+            a.mediaIcon(href="www.twitter.com" class="fa fa-twitter")
+            a.mediaIcon(href="www.google.com" class="fa fa-google")
             
 
 

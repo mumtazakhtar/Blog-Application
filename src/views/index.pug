@@ -8,6 +8,7 @@ html
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     link(rel="stylesheet", type="text/css", href="css/style.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
   body
     nav.navbar.navbar-default.nav
       .container
@@ -19,21 +20,52 @@ html
           li
             a(href='/allposts') All posts
           li
-            a(href='/profile') Profile
-       
+            a(href='#') About us
+        ul.nav.navbar-nav.navbar-right
+          
+          li
+            form#displayForm(action='/login', method='POST', autocomplete='off')
+              
+              input.field(type='text', name='name', placeholder="Enter your name")
+              
+              input.field(type='password', name='password', placeholder= "Enter password")
+              
+              button.field(type='submit', name="login") Login
+          li
+            a(href='/users/new')
+              span.glyphicon.glyphicon-user
+              |  Sign Up
+              //- p.para Not registered yet!
+              //- a.btn_login(href='/users/new', role='button') Signup
+          //- li
+          //-   a#login-form(href='/login')
+          //-     span.glyphicon.glyphicon-log-in
+          //-     |  Login
+
   if message
-    p.message= message
-  form.input-field-login(action='/login', method='POST', autocomplete='off')
-    h2 LOGIN
-    br
-    br
-    input.fields(type='text', name='name', placeholder="user name")
-    br
-    br
-    input.fields(type='password', name='password', placeholder= "password")
-    br
-    br
-    button.btn_signup(type='submit', name="login") Login
-    p.para Not registered yet!
-    a.btn_login(href='/users/new', role='button') Signup
+  p.message= message
+    .container-fluid
+      .rows
+        .col-lg-12.banner
+          img(src='images/banner.jpg' width='100%' height='50%')
+
+    
+    .footer
+      .container
+        .rows
+          div.col-lg-4
+            p.copyrights copyrights @ 2017 All rights reserved
+          div.col-lg-4
+          div.col-lg-4
+            a.mediaIcon(href="www.facebook.com" class="fa fa-facebook")
+            a.mediaIcon(href="www.twitter.com" class="fa fa-twitter")
+            a.mediaIcon(href="www.google.com" class="fa fa-google")
+
+
+  
+  
+  
+  
+    
+
   
