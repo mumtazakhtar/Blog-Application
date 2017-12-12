@@ -33,13 +33,13 @@ html
                   
           form.input-field-login(action='/users', method='POST', autocomplete='off', enctype='multipart/form-data')
             h2 Create Your Account
-            input.fields(type='text', name='name', placeholder=" firstname or lastname")
+            input.fields(type='text', name='name', placeholder=" firstname or lastname", required)
             br
             br
-            input.fields(type='text', name='email', placeholder="Email Address")
+            input.fields(type='text', name='email', placeholder="Email Address", required)
             br
             br
-            input.fields(type='password', name='password', placeholder= "password")
+            input.fields(type='password', name='password', placeholder= "password", required)
             br
             br
             p Add a profile picture

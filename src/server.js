@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const bcrypt = require('bcrypt')
 
 const app = express();
 
@@ -78,7 +79,7 @@ app.get('/', function(req, res) {
 })
 
 // <----------Create new user (Signup)----------->
-app.post('/users' , upload.single('profileImage'), (req, res, next)=> {
+app.post('/users', upload.single('profileImage'), (req, res, next) => {
 
     let path = req.file.path.replace('public', '')
     let Name = req.body.name
@@ -86,17 +87,23 @@ app.post('/users' , upload.single('profileImage'), (req, res, next)=> {
     let Password = req.body.password
 
     console.log(`input details--> ${Name}-->${Email}-->${Password}`)
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(Password, salt, function(err, hash) {
 
-    User.create({
-        name: Name,
-        email: Email,
-        password: Password,
-        profilePicture: path
-    }).then(function(user) {
-        req.session.user = user;
-        res.redirect('/?message=' + encodeURIComponent("you are succesfully registered"))
+            User.create({
+                name: Name,
+                email: Email,
+                password: hash,
+                profilePicture: path
+            }).then(function(user) {
+                req.session.user = user;
+                res.redirect('/?message=' + encodeURIComponent("you are succesfully registered"))
 
+            })
+
+        })
     })
+
 })
 
 //<----------------(GET) sign up page------------->
@@ -105,28 +112,37 @@ app.get('/users/new', function(req, res) {
 })
 
 //<----------------(POST) login---------------->
-app.post('/login', function(req, res) {
-    let name = req.body.name;
-    let password = req.body.password;
+app.post('/login', function(request, response) {
+    let name = request.body.name;
+    let password = request.body.password;
     console.log(`input details-->${name}-->${password}`)
 
     User.findOne({
-        where: {
-            name: name
-        }
-
-    }).then(function(details) {
-
-        if (details !== null && password === details.password) {
-            req.session.user = details;
-            
-                res.redirect('/profile')
+            where: {
+                name: name
             }
-         else {
-            res.redirect('/?message='+ encodeURIComponent("Invalid Email or Password"))
-        } 
 
-    })
+        }).then(function(details) {
+
+            if (details !== null) {
+                bcrypt.compare(password, details.password, function(err, res) {
+                    if (res) {
+                        request.session.user = details;
+
+                        response.redirect('/profile');
+
+                    } else {
+                        response.redirect('/?message=' + encodeURIComponent("Invalid Email or Password"))
+
+                    }
+                })
+
+            }
+
+        })
+        .catch(function(error) {
+            console.error(error)
+        })
 
 })
 
