@@ -29,9 +29,12 @@ html
     .container
       .rows
         .col-lg-4
+          
         .col-lg-4
                   
           form.input-field-login(action='/users', method='POST', autocomplete='off', enctype='multipart/form-data')
+            if error
+              p(style="text-align: center; font-size:25px; color: black")= error
             h2 Create Your Account
             input.fields(type='text', name='name', placeholder=" firstname or lastname", required)
             br
@@ -39,8 +42,10 @@ html
             input.fields(type='text', name='email', placeholder="Email Address", required)
             br
             br
-            input.fields(type='password', name='password', placeholder= "password", required)
+            input.fields(type='password', name='password1', placeholder= "password", minlength="8", maxlength="12",  required)
             br
+            br
+            input.fields(type='password', name='password2', placeholder= "confirm password", minlength="8", maxlength="12",  required)
             br
             p Add a profile picture
             input.fields(type='file', name='profileImage', placeholder='Upload profile picture', required)
@@ -49,4 +54,6 @@ html
             button.btn_signup(type='submit', name="sign-up") Signup
             p.para Already registered!
             a.btn_login(href='/login', role='button') login
+
+
   

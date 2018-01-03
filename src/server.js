@@ -80,11 +80,14 @@ app.get('/', function(req, res) {
 
 // <----------Create new user (Signup)----------->
 app.post('/users', upload.single('profileImage'), (req, res, next) => {
+    if(req.body.password1 === req.body.password2){
+
+
 
     let path = req.file.path.replace('public', '')
     let Name = req.body.name
     let Email = req.body.email
-    let Password = req.body.password
+    let Password = req.body.password1
 
     console.log(`input details--> ${Name}-->${Email}-->${Password}`)
     bcrypt.genSalt(10, function(err, salt) {
@@ -103,6 +106,11 @@ app.post('/users', upload.single('profileImage'), (req, res, next) => {
 
         })
     })
+  }
+  else{
+    let errorMessage = "passwords must match"
+    res.render('signup', {error: errorMessage})
+  }
 
 })
 
