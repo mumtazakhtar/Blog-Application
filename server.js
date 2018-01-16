@@ -38,7 +38,7 @@ app.use(session({
 const multer  = require('multer')
 const myStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '../public/images/user-images')
+        cb(null, './public/images/user-images')
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now())
