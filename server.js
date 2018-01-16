@@ -9,8 +9,8 @@ const bcrypt = require('bcrypt')
 const app = express();
 
 //<-------connecting to postgres database--------->
-const sequelize = new Sequelize('blogapp', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
-    host: 'localhost',
+const sequelize = new Sequelize(process.env.POSTGRES_NAME, process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
+    host: process.env.POSTGRES_HOST,
     dialect: 'postgres',
     storage: './session.postgres'
 })
@@ -340,6 +340,7 @@ app.get('/logout', function(req, res) {
 sequelize.sync()
 
 //<---PORT--->
-app.listen(4000, function() {
-    console.log("app is listening at port 4000")
+var port = process.env.PORT || 8080;
+app.listen(port, function(){
+    console.log("app listening at port " + port);
 })
